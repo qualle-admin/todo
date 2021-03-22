@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Todo
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## For Endpoint
+
+This project was created to highlight some key elements of React 16+ (Hooks, styled components, etc).
+
+I eventually chose Google Firebase (firestore) for back end storage, these method can be wrapped into
+a simple express server for CRUD opertions (create, read update, delete), however I elected to use
+the the firebase npm package as it exposes methods like `onSnapshot` which acts like a websocket connection
+and provides live update to the ui.
+
+Basic tests provided.
 
 ## Available Scripts
 
