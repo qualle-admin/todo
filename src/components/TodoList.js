@@ -36,6 +36,8 @@ const StyledInput = styled(Input)(({
   textAlign: 'left !important',
 }));
 
+const columnStyle = { width: '300px' };
+
 const TodoList = ({ todos }) => {
   const [openTodo, setOpenTodo] = useState(null);
   const [input, setInput] = useState('');
@@ -103,8 +105,8 @@ const TodoList = ({ todos }) => {
           >
             <input type="checkbox" onChange={() => handleComplete(id)} checked={completed} />
             <Avatar size="large" icon={<UserOutlined />} />
-            <div style={{ width: '300px' }}>{todo}</div>
-            <div>{moment(date).fromNow()}</div>
+            <div style={columnStyle}>{todo}</div>
+            <div style={columnStyle}>{moment(date).fromNow()}</div>
           </StyledListItem>
         )}
       />
