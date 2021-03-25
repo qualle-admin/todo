@@ -20,6 +20,10 @@ const StyledList = styled(List)(({
 const StyledListItem = styled(List.Item)(({
   '.ant-list-item-meta': {
     alignItems: 'center',
+  },
+
+  '&.completed': {
+    opacity: '0.5',
   }
 }));
 
@@ -58,6 +62,17 @@ const TodoList = ({ todos }) => {
     setOpenTodo(null);
   });
 
+  const handleComplete = useCallback(async id => {
+    const { completed } = await (await api.collection('todos').doc(id).get()).data();
+
+    await api.collection('todos').doc(id).set(
+      {
+        completed: !completed
+      },
+      { merge: true }
+    )
+  });
+
   return (
     <div>
       <Modal title="Edit Todo" visible={openTodo} onCancel={handleClose} footer={null}>
@@ -78,17 +93,17 @@ const TodoList = ({ todos }) => {
 
       <StyledList
         dataSource={todos}
-        renderItem={({ id, todo, date }) => (
+        renderItem={({ id, todo, date, completed }) => (
           <StyledListItem
+            className={completed ? 'completed' : ''}
             actions={[
-              <Button onClick={(e) => setOpenTodo({ id })}> Edit </Button>,
-              <Button onClick={() => deleteTodo(id)}> Remove </Button>
+              <Button onClick={(e) => setOpenTodo({ id })} disabled={completed}> Edit </Button>,
+              <Button onClick={() => deleteTodo(id)} disabled={completed}> Remove </Button>
             ]}
           >
-            <List.Item.Meta
-              avatar={<Avatar size="large" icon={<UserOutlined />} />}
-              title={todo}
-            />
+            <input type="checkbox" onChange={() => handleComplete(id)} checked={completed} />
+            <Avatar size="large" icon={<UserOutlined />} />
+            <div style={{ width: '300px' }}>{todo}</div>
             <div>{moment(date).fromNow()}</div>
           </StyledListItem>
         )}

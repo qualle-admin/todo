@@ -39,10 +39,11 @@ const Todo = () => {
         }));
 
         setTodos(
-          todos.map(({ id, todo, date }) => ({
+          todos.map(({ id, todo, date, completed }) => ({
             id,
             todo,
             date,
+            completed,
           }))
         );
       });
