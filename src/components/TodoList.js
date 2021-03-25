@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   Avatar,
   Button,
+  Checkbox,
   Input,
   List,
   Modal,
@@ -103,7 +104,7 @@ const TodoList = ({ todos }) => {
               <Button onClick={() => deleteTodo(id)} disabled={completed}> Remove </Button>
             ]}
           >
-            <input type="checkbox" onChange={() => handleComplete(id)} checked={completed} />
+            <Checkbox onChange={() => handleComplete(id)} checked={completed} />
             <Avatar size="large" icon={<UserOutlined />} />
             <div style={columnStyle}>{todo}</div>
             <div style={columnStyle}>{moment(date).fromNow()}</div>
